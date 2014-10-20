@@ -1,4 +1,6 @@
 <?php
+// @file block missing
+
 /**
  * Implementation of hook_ctools_plugin_directory().
  */
@@ -10,10 +12,14 @@ function ding_place2book_ctools_plugin_directory($module, $plugin) {
 
 /**
 * Implementation of hook_enable().
+ *
+ * Skal denne function ikke være i .install
 */
 function ding_place2book_enable() {
   /*
    * Create a field on the Event nodetype as a placeholder for the order-button/info-area
+   *
+   * Skal denne commentar ikke op over functionen eller være single-line comment
    */
   // Check if our field is not already created.
   if (!field_info_field('field_place2book_tickets')) {
@@ -46,6 +52,8 @@ function ding_place2book_enable() {
 
 /**
 * Implementation of hook_disable().
+ *
+ * Skal denne function ikke være i .install
 */
 function ding_place2book_disable() {
   field_delete_field('field_place2book_tickets');
@@ -74,6 +82,8 @@ function ding_place2book_get_ticketinfo($nid) {
 
 /**
  * Implementation of hook_init().
+ *
+ * Skal js/css virkelig loades på alle sider?
  */
 function ding_place2book_init() {
   drupal_add_js(drupal_get_path('module', 'ding_place2book') . '/js/ding_place2book.js');
@@ -185,6 +195,7 @@ function ding_place2book_node_insert($node) {
   if ($node->type == "ding_event") {
     if ($node->place2book['maintain_copy'] == 1) {
       // Insert - maintain_copy and new event node.
+      // ubrugt variabel
       $place2book_id = place2book_event_op('insert', $node);
     }
     else {
@@ -246,8 +257,8 @@ function ding_place2book_node_update($node) {
   }
 }
 
-/*
- * Implementation of hook_node_delete()
+/**
+ * Implementation of hook_node_delete().
  */
 function ding_place2book_node_delete($node) {
   // We only handle event nodes.
@@ -258,6 +269,8 @@ function ding_place2book_node_delete($node) {
      *
      * REVIEW: Maybe a clean-up check could be execute by the
      *         administrator or cron?
+     *
+     * Der er vist noget oprydning der skal ske her.
      */
     $place2book_id = db_query('SELECT place2book_id
                                FROM {ding_place2book}
@@ -471,6 +484,8 @@ function place2book_event_op($op, $node, $place2book_id = NULL) {
       // dont delete from ding_place2book
       // update table, set maintain_copy back to selected
       // message to user: server says no, some have already bought tickets
+
+      // REVIEW: er ovenstående commentar implementeret? Det ser nemlig umiddelbart ikke sådan ud.
       break;
 
     default:
@@ -491,7 +506,7 @@ function place2book_event_op($op, $node, $place2book_id = NULL) {
  *
  * REVIEW: Maybe move this into a communication object and use the NanoSoap
  *         module as parent. NanoSoap is used by the ting-client to communicate
- *         with the data well.
+ *         with the data well. -> Godt foreslag
  *
  * @param object $node
  *  A node object of node event type
@@ -785,8 +800,9 @@ function _place2book_db_op($op, $node, $place2book_id = NULL) {
   }
 }
 
-/*
+/**
  * validation function for checking place2book settings that need to be integers
+ * Review: Denne function ser ikke ud til at blive brugt
  */
 function _place2book_setting_is_numeric($element, &$form_state) {
   if (!is_numeric($element['#value'])) {
@@ -822,8 +838,10 @@ function place2book_get_api_key($library_id = NULL) {
   return $api_key;
 }
 
-/*
+/**
  * Rendering function for place2book tickets info
+ *
+ * Review: Parameter beskrivelse mangler
  */
 function render_place2book_ticketsinfo($node) {
   $type = '';
@@ -916,12 +934,14 @@ function render_place2book_ticketsinfo($node) {
   return theme('place2book_ticketsinfo', array('place2book_id' => $place2book_id, 'url' => $url, 'type' => $type));
 }
 
-/*
+/**
  * ticketsinfo theme function
+ *
+ * Mangler parameter beskrivelse
  */
 function theme_place2book_ticketsinfo($variables) {
-  $output = '';
-  $place2book_id = $variables['place2book_id'];
+  $output = ''; // bliver ikke bruget
+  $place2book_id = $variables['place2book_id']; //bliver ikke brugt
   $url = $variables['url'];
   $type = $variables['type'];
 
@@ -949,7 +969,7 @@ function theme_place2book_ticketsinfo($variables) {
   return $output;
 }
 
-/*
+/**
  * Implements hook_theme().
  */
 function ding_place2book_theme() {

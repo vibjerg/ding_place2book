@@ -1,3 +1,5 @@
+REVIEW: Skal denne fil ikke slettes?
+
 NOTES for CONVERTING to ding2/drupal7
 -------------------------------------
 - Translate the module again (install potx first to ease this)
@@ -6,20 +8,20 @@ NOTES for CONVERTING to ding2/drupal7
 
 # Changed context in ding2 to consider:
 
-- There is only one taxonomy - Category. I might have to create event target and 
+- There is only one taxonomy - Category. I might have to create event target and
 event category-taxonomies to have data for the kultunaut part. But the better solution would be to
 implement the term mapping feature now, and map terms from Category taxonomy to Kultunaut target and
 category. Then we can avoid adding extra vocabularies + give better control to the ding administrator.
 
-- fieldgroup module changed in drupal 7. It might not be needed anymore? Same with 
+- fieldgroup module changed in drupal 7. It might not be needed anymore? Same with
 optionwidgets - included in core now?
 
-- ding_event now has no end time enabled, but it is in the output. If todate= fromdate is a problem, 
+- ding_event now has no end time enabled, but it is in the output. If todate= fromdate is a problem,
 make check to ensure that todate-value is only used when it is different from fromdate.
 
 - ding_event now has no field for price. Must add it, this also means adding it to the db table
 
-- Libraries are now implemented as organic groups. Getting the id (now, the etid, entity ID) of the library 
+- Libraries are now implemented as organic groups. Getting the id (now, the etid, entity ID) of the library
 is a matter of querying "field_group_audience" and "og" tables.
 
 NOTER FOR VERSION 2 mod den nye API
@@ -97,7 +99,7 @@ http://drupal.org/node/633354
 (- address/location override (also practical without using the place2book functionality). NB! Field already on the event-node!)
 
 - maintain copy on place2book (default:on)
-if unselecting the setting on an existing event node, request to delete the corresponding info. on place2book. Activates/grays out the place2book section below. 
+if unselecting the setting on an existing event node, request to delete the corresponding info. on place2book. Activates/grays out the place2book section below.
 
 - place2book section (whole section active/inactive)
 	- related place2book event ID (default: null)
@@ -127,7 +129,7 @@ Event-node create, edit or delete with no contact to place2book server = write m
 
 * VISNING:
 ----------
-Hvis event-node har place2book-ID og ikke har fundet sted, 
+Hvis event-node har place2book-ID og ikke har fundet sted,
 s�
 	- inds�t place2book section samt javascript i event-noden.
 	Javascript-kode kalder place2book op for status p� event:
@@ -145,10 +147,10 @@ ellers
 place2book HTML section, with initial display:none on elements:
 <div class="place2book">
 	<div class="order-ticket">
-		
+
 	</div>
 	<div class="sold-out">
-	
+
 	</div>
 	<div class="error"></div>
 </div>
@@ -203,7 +205,7 @@ noter vedr. xml-skabelonen og mapping af felter:
 => lav ekstra felt i nodeform til det. Er det tomt, slettes det fra xml-skabelonen der sendes til place2book.
 
     <unlimited_capacity>0</unlimited_capacity>
-=> s�ttes til 1 som standard. Hvis det nye felt til capacity ovenfor har en v�rdi, s�ttes denne nul i xml-skabelonen til place2book. 
+=> s�ttes til 1 som standard. Hvis det nye felt til capacity ovenfor har en v�rdi, s�ttes denne nul i xml-skabelonen til place2book.
 
     <price>
       <name>Voksen</name>

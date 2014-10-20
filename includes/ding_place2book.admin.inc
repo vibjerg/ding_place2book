@@ -85,6 +85,7 @@ function ding_place2book_admin_settings_form($form_state) {
   $defaults = variable_get('ding_place2book_libraries', array());
 
   // Find all libraries and order them by title.
+  // Der er flere gange brugt db_query i filen, burde man ikke bruge db_select i stedet?
   $result = db_query("SELECT n.nid, n.title FROM {node} n
                       WHERE type = 'ding_library'
                       ORDER BY title");
@@ -182,6 +183,7 @@ function ding_place2book_kultunaut_form($form_state) {
                       ORDER BY name");
 
   // Load default settings
+  // Her gentages code fra linie 157 - 202, kunne med fordel refaktoreres
   $defaults = variable_get('ding_place2book_target_mappings', array());
 
   foreach ($result as $record) {
@@ -225,6 +227,8 @@ function ding_place2book_kultunaut_form_validate($form, &$form_state) {
 
 /*
  * Returns a JSON string containing the default Kultunaut category terms found at http://www.kultunaut.dk/perl/export/nautgenrerxml
+ *
+ * Burde disse ikke ligge i en ekstern json fil. Vil også gøre det nemmere at opdatere
  */
 function ding_place2book_kultunaut_cat_json() {
   $json  = '{
@@ -329,6 +333,8 @@ function ding_place2book_kultunaut_cat_json() {
 
 /*
  * Returns an array of all Kultunaut category terms
+ *
+ * Det virker lidt underligt at kategorierne er gemt i json og bliver lavet om til et array. Kunne det være et array fra starten
  */
 function place2book_get_kultunaut_categories() {
   $categories = array();
